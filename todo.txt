@@ -1,0 +1,20 @@
+- faire la db
+- mettre en place l'administration
+- faire la partie articles
+    - mettre en place les commentaires
+- faire la partie contact
+- faire la home page
+
+outils:
+
+- laravel s3
+- glide php
+- les queues de laravel pour envoyer les mails
+- sitemap avec une command de laravel
+- laravel spacie permissions
+- créer un helper blade pour les permissions
+
+code quality:
+
+- phpstan level 8
+- laravel lint
