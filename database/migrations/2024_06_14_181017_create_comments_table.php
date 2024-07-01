@@ -28,6 +28,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->foreignIdFor(Comment::class)
+                ->nullable()
                 ->constrained()
                 ->cascadeOnDelete();
 

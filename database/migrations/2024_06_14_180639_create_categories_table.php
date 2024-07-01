@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('categories_articles', function (Blueprint $table) {
+        Schema::create('article_category', function (Blueprint $table) {
             $table->id();
 
             $table->foreignIdFor(Category::class);

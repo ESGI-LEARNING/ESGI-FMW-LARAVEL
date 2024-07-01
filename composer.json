@@ -12,6 +12,7 @@
         "barryvdh/laravel-debugbar": "^3.13",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
+        "paulhennell/faker-news": "^2.0",
         "predis/predis": "^2.2"
     },
     "require-dev": {
