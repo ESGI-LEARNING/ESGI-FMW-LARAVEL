@@ -17,7 +17,7 @@ class ImageFactory extends Factory
     public function definition(): array
     {
         return [
-            'path' => 'https://picsum.photos/200/300',
+            'path' => 'https://picsum.photos/200/150',
         ];
     }
 }
