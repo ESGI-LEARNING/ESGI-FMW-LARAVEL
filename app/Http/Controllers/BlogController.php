@@ -20,7 +20,7 @@ class BlogController extends Controller
     public function show(Article $article): View
     {
         $article = Article::query()
-            ->with(['categories', 'images'])
+            ->with(['categories', 'images', 'comments'])
             ->where('is_published', true)
             ->findOrFail($article->id);
 
