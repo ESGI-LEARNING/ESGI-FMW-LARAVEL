@@ -110,6 +110,25 @@
                     </div>
                 </div>
             </div>
+            <!-- Comments -->
+            <div class="mt-10">
+                <h2 class="text-xl mb-2">Comments</h2>
+                <div class="max-w-full mx-auto">
+                    @foreach($article->comments as $comment)
+                        <div class="p-4 bg-white shadow sm:rounded-lg mb-4">
+                            <div class="flex justify-between gap-8">
+                                <div class="w-full">
+                                    <h3 class="font-semibold">{{ $comment->user->name }}</h3>
+                                    <p>{{ $comment->content }}</p>
+                                </div>
+                                <div>
+                                    <p>{{ $comment->created_at->diffForHumans() }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>
