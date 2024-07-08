@@ -2,16 +2,17 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/images/{path}', [ImageController::class, 'show'])->where('path', '.*')->name('images.show');
 
 Route::controller(BlogController::class)->prefix('/blog')->name('blog.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/{article:slug}', 'show')->name('show');
-
 });
 
 Route::middleware('auth')->group(function () {
