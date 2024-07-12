@@ -12,7 +12,7 @@ class HomeController extends Controller
         $articles = Article::query()
             ->with(['categories', 'images'])
             ->where('is_published', true)
-            ->paginate(6);
+            ->paginate(3);
 
         return view('home', [
             'articles' => $articles,
