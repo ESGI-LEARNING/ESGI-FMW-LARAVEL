@@ -3,7 +3,7 @@
     <x-slot name="title">{{ $title }}</x-slot>
     <x-slot name="description">{{ $description }}</x-slot>
     <x-slot name="assets">
-        @vite(['resources/css/app.scss', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </x-slot>
 
 
