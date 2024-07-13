@@ -6,11 +6,18 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
+use Livewire\Attributes\Validate;
 use LivewireUI\Modal\ModalComponent;
 
 class AdminModalEditUser extends ModalComponent
 {
     public User $user;
+
+    #[Validate('required|min:3')]
+    public string $name = '';
+
+    #[Validate('required|email')]
+    public string $email = '';
 
     public Collection $roles;
 
@@ -19,6 +26,8 @@ class AdminModalEditUser extends ModalComponent
     public function mount(User $user): void
     {
         $this->user         = $user;
+        $this->name         = $user->name;
+        $this->email        = $user->email;
         $this->user_roles   = $user->roles->pluck('id')->toArray();
 
         $this->roles = Role::all();
@@ -26,13 +35,13 @@ class AdminModalEditUser extends ModalComponent
 
     public function update(): void
     {
-        $this->validate([
-            'user.name' => 'required|string',
-            'user.email' => 'required|email',
-            'user_roles' => 'required',
+        $this->validate();
+
+        $this->user->update([
+            'name'  => $this->name,
+            'email' => $this->email,
         ]);
 
-        $this->user->save();
         $this->user->roles()->sync($this->user_roles);
 
         session()->flash('success', 'Utilisateur modifier avec success');

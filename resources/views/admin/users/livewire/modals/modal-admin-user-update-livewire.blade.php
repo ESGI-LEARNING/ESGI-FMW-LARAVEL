@@ -8,13 +8,13 @@
             <div class="grid grid-cols-2 gap-3">
                 <div>
                     <x-modules.form.input-label for="name" :value="__('input.label.name')"/>
-                    <x-modules.form.text-input wire:model.defer="user.name" class="w-full" type="text"/>
-                    <x-modules.form.input-error :messages="$errors->get('user.name')" class="mt-2"/>
+                    <x-modules.form.text-input wire:model.defer="name" class="w-full" type="text"/>
+                    <x-modules.form.input-error :messages="$errors->get('name')" class="mt-2"/>
                 </div>
                 <div>
                     <x-modules.form.input-label for="email" :value="__('input.label.email')"/>
-                    <x-modules.form.text-input wire:model.defer="user.email" class="w-full" type="email"/>
-                    <x-modules.form.input-error :messages="$errors->get('user.email')" class="mt-2"/>
+                    <x-modules.form.text-input wire:model.defer="email" class="w-full" type="email"/>
+                    <x-modules.form.input-error :messages="$errors->get('email')" class="mt-2"/>
                 </div>
             </div>
             <div class="mt-3">
