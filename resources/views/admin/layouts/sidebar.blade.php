@@ -10,26 +10,26 @@
             <li class="sidebar-menu-title">{{ __('title.admin.administration') }}</li>
             <x-modules.sidebar.sidebar-link href="{{ route('admin.users') }}" :active="request()->routeIs('admin.users.*')">
                 <x-icons.icon-users/>
-                {{ __('title.users.index') }}
+                Utilisateurs
             </x-modules.sidebar.sidebar-link>
             <x-modules.sidebar.sidebar-link href="" :active="null">
                 <x-icons.icon-logs/>
-                {{ __('title.logs.index') }}
+                Logs
             </x-modules.sidebar.sidebar-link>
         </x-modules.sidebar.sidebar-menu>
         <x-modules.sidebar.sidebar-menu>
             <li class="sidebar-menu-title">{{ __('title.admin.properties') }}</li>
-            <x-modules.sidebar.sidebar-link href="" :active="null">
+            <x-modules.sidebar.sidebar-link href="{{ route('admin.categories') }}" :active="request()->routeIs('admin.categories.*')">
                 <x-icons.icon-categories/>
-                {{ __('title.categories.index') }}
+                Categories
             </x-modules.sidebar.sidebar-link>
             <x-modules.sidebar.sidebar-link href="" :active="null">
                 <x-icons.icon-news/>
-                {{ __('title.articles.index') }}
+                Articles
             </x-modules.sidebar.sidebar-link>
             <x-modules.sidebar.sidebar-link href="" :active="null">
                 <x-icons.icon-comments/>
-                {{ trans_choice('title.comments.index', 2) }}
+                Commentaires
             </x-modules.sidebar.sidebar-link>
         </x-modules.sidebar.sidebar-menu>
     </div>
