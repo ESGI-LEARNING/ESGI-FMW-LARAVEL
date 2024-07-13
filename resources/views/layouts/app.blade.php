@@ -5,8 +5,6 @@
     <x-slot name="assets">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </x-slot>
-
-
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation')
 
