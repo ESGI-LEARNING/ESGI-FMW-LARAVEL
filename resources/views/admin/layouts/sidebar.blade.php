@@ -8,7 +8,7 @@
         </x-modules.sidebar.sidebar-menu>
         <x-modules.sidebar.sidebar-menu>
             <li class="sidebar-menu-title">{{ __('title.admin.administration') }}</li>
-            <x-modules.sidebar.sidebar-link href="" :active="request()->routeIs('admin.users.*')">
+            <x-modules.sidebar.sidebar-link href="{{ route('admin.users') }}" :active="request()->routeIs('admin.users.*')">
                 <x-icons.icon-users/>
                 {{ __('title.users.index') }}
             </x-modules.sidebar.sidebar-link>
