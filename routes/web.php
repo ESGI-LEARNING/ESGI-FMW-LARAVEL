@@ -1,6 +1,7 @@
 <?php
 
 use App\Enum\RolesEnum;
+use App\Http\Controllers\Admin\AdminArticleController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
@@ -27,6 +28,14 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/users', [AdminController::class, 'users'])->name('users');
         Route::get('/categories', [AdminController::class, 'categories'])->name('categories');
+
+        Route::controller(AdminArticleController::class)->prefix('/articles')->name('articles.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/create', 'store')->name('store');
+            Route::get('/{article}/edit', 'edit')->name('edit');
+            Route::patch('/{article}', 'update')->name('update');
+        });
     });
 });
 

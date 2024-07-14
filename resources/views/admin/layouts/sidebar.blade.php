@@ -23,7 +23,7 @@
                 <x-icons.icon-categories/>
                 Categories
             </x-modules.sidebar.sidebar-link>
-            <x-modules.sidebar.sidebar-link href="" :active="null">
+            <x-modules.sidebar.sidebar-link href="{{ route('admin.articles.index') }}" :active="request()->routeIs('admin.articles.*')">
                 <x-icons.icon-news/>
                 Articles
             </x-modules.sidebar.sidebar-link>

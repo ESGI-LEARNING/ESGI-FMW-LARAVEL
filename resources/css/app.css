@@ -1,3 +1,5 @@
+@import '/node_modules/tom-select/dist/css/tom-select.default.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -66,4 +68,41 @@
 .dashboard-body {
     @apply w-full relative overflow-y-auto lg:ml-64 p-5;
 }
+
+/**
+    * lib
+ */
+
+.ts-control {
+    @apply border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md gap-2 py-[11.5px];
+}
+
+.ts-wrapper.plugin-remove_button .item {
+    @apply rounded-md;
+}
+.ts-wrapper.multi .ts-control > div {
+    @apply px-0 m-0 pl-1;
+}
+
+.ts-wrapper.plugin-remove_button .item .remove {
+    @apply border-none text-lg leading-none py-[5px] rounded-r-lg;
+}
+
+.ts-dropdown {
+    @apply rounded-md border border-solid border-t border-gray-300;
+}
+
+.ts-dropdown [data-selectable].option:first-child {
+    @apply rounded-t-md;
+}
+
+.ts-dropdown [data-selectable].option:last-child {
+    @apply rounded-b-md;
+}
+.ts-dropdown .create:hover,
+.ts-dropdown .option:hover,
+.ts-dropdown .active {
+    @apply bg-indigo-100 text-indigo-900;
+}
+
 

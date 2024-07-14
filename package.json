@@ -17,6 +17,10 @@
     },
     "dependencies": {
         "@alpinejs/focus": "^3.14.1",
-        "@ryangjchandler/alpine-clipboard": "^2.3.0"
+        "@ryangjchandler/alpine-clipboard": "^2.3.0",
+        "install": "^0.13.0",
+        "npm": "^10.8.2",
+        "quill": "^2.0.2",
+        "tom-select": "^2.3.1"
     }
 }
