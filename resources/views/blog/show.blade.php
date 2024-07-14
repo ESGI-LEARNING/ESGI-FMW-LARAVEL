@@ -1,4 +1,6 @@
 <x-app-layout>
+    <x-slot name="title">Blog</x-slot>
+    <x-slot name="description">On vous présente l'article {{ $article->title }}</x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ $article->title }}
