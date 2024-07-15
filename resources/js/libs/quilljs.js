@@ -4,7 +4,7 @@ let selector = 'editor-quilljs'
 let input = document.getElementById(selector)
 
 if (input) {
-    new Quill(selector, {
+    const quill = new Quill("#editor-quilljs", {
         modules: {
             toolbar: [
                 [{ header: [1, 2, 3, false] }],
