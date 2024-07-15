@@ -16,6 +16,7 @@
         "livewire/livewire": "^3.5",
         "paulhennell/faker-news": "^2.0",
         "predis/predis": "^2.2",
+        "spatie/laravel-sitemap": "^7.2",
         "wire-elements/modal": "^2.0"
     },
     "require-dev": {
