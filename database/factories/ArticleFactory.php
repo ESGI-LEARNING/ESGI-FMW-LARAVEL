@@ -20,10 +20,10 @@ class ArticleFactory extends Factory
         $title = $this->faker->sentence(10);
 
         return [
-            'title'   => $title,
-            'slug'    => Str::slug($title),
-            'description' => $this->faker->paragraph(2),
-            'content' => $this->faker->paragraph(),
+            'title'        => $title,
+            'slug'         => Str::slug($title),
+            'description'  => $this->faker->paragraph(2),
+            'content'      => $this->faker->paragraph(),
             'is_published' => $this->faker->boolean(),
             'published_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];

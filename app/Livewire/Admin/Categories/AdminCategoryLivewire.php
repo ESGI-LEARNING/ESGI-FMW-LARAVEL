@@ -12,6 +12,7 @@ use Livewire\WithPagination;
 class AdminCategoryLivewire extends Component
 {
     use WithPagination;
+
     #[Url(history: true)]
     public string $search = '';
 
@@ -25,7 +26,7 @@ class AdminCategoryLivewire extends Component
     {
         $categories = Category::query()
             ->where(function ($query) {
-                    $query->where('name', 'like', '%' . $this->search . '%');
+                $query->where('name', 'like', '%'.$this->search.'%');
             })
             ->paginate(10);
 

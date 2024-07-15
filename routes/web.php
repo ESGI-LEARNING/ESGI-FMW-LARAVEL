@@ -9,7 +9,6 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/images/{path}', [ImageController::class, 'show'])->where('path', '.*')->name('images.show');
 
@@ -23,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::prefix('/admin')->middleware('role:' . RolesEnum::SUPER_ADMIN)->name('admin.')->group(function () {
+    Route::prefix('/admin')->middleware('role:'.RolesEnum::SUPER_ADMIN)->name('admin.')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('index');
 
         Route::get('/users', [AdminController::class, 'users'])->name('users');
@@ -39,7 +38,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::get('/sitemap.xml', function() {
+Route::get('/sitemap.xml', function () {
     return response()->file(public_path('sitemap.xml'));
 });
 

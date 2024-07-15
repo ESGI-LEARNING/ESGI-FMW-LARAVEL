@@ -4,7 +4,8 @@ namespace App\Console\Commands;
 
 use App\Models\Article;
 use Illuminate\Console\Command;
-use App\Jobs\GenerateSitemap;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
@@ -12,30 +13,24 @@ use Spatie\Sitemap\Tags\Url;
 class GenerateSitemapCommand extends Command
 {
     protected $signature = 'sitemap:generate';
+
     protected $description = 'Generate and upload sitemap';
 
-    public function handle()
+    public function handle(): void
     {
         $sitemap = Sitemap::create();
 
-        // Ajoutez la page d'accueil
-        $sitemap->add(Url::create('/'));
+        $sitemap->add('/');
+        $sitemap->add('/blog');
 
-        // Ajoutez d'autres pages statiques
-        $sitemap->add(Url::create('/about'));
-        $sitemap->add(Url::create('/contact'));
-
-        // Ajoutez des pages dynamiques, par exemple des articles de blog
-        Article::all()->each(function (Article $post) use ($sitemap) {
-            $sitemap->add(Url::create("/blog/{$post->slug}")
-                ->setLastModificationDate($post->updated_at)
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
-                ->setPriority(0.8));
+        Article::chunk(200, function (Collection $posts) use ($sitemap) {
+            foreach ($posts as $post) {
+                $sitemap->add("/blog/{$post->slug}", $post->updated_at, 0.8, 'weekly');
+            }
         });
 
-        // Sauvegardez le sitemap dans le dossier public
-        $sitemap->writeToFile(public_path('sitemap.xml'));
-
-        $this->info('Sitemap generation job dispatched.');
+        Storage::disk('public')->put('sitemap.xml', $sitemap->render());
+        Storage::disk('s3')->put('config/sitemap.xml', $sitemap->render());
+        $this->info('Sitemap generation completed.');
     }
 }

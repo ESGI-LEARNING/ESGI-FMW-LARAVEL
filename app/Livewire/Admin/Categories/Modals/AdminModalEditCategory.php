@@ -6,7 +6,6 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Livewire\Attributes\Validate;
-use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 
 class AdminModalEditCategory extends ModalComponent
@@ -19,7 +18,7 @@ class AdminModalEditCategory extends ModalComponent
     public function mount(Category $category): void
     {
         $this->category = $category;
-        $this->name = $category->name;
+        $this->name     = $category->name;
     }
 
     public function update(): void

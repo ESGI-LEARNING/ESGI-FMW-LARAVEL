@@ -18,7 +18,7 @@ class AdminModalDeleteUser extends ModalComponent
 
     public function delete(): void
     {
-        $this->user->name = 'guest';
+        $this->user->name       = 'guest';
         $this->user->deleted_at = Carbon::now();
         $this->user->save();
 

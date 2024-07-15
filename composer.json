@@ -12,6 +12,7 @@
         "barryvdh/laravel-debugbar": "^3.13",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
+        "league/flysystem-aws-s3-v3": "^3.28",
         "league/glide": "^2.3",
         "livewire/livewire": "^3.5",
         "paulhennell/faker-news": "^2.0",

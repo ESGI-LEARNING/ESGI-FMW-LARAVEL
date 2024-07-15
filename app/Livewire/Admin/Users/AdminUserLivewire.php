@@ -14,6 +14,7 @@ use Livewire\WithPagination;
 class AdminUserLivewire extends Component
 {
     use WithPagination;
+
     #[Url(history: true)]
     public string $search = '';
 
@@ -29,8 +30,8 @@ class AdminUserLivewire extends Component
             ->with('roles')
             ->where(function ($query) {
                 if ($this->search) {
-                    $query->where('name', 'like', '%' . $this->search . '%')
-                        ->orWhere('email', 'like', '%' . $this->search . '%');
+                    $query->where('name', 'like', '%'.$this->search.'%')
+                        ->orWhere('email', 'like', '%'.$this->search.'%');
                 }
             })
             ->paginate(10);
