@@ -17,7 +17,7 @@ class Article extends Model
         'description',
         'content',
         'published_at',
-        'is_published'
+        'is_published',
     ];
 
     public function comments(): HasMany

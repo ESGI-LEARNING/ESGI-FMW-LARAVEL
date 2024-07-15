@@ -47,7 +47,6 @@ class AdminModalEditUser extends ModalComponent
         session()->flash('success', 'Utilisateur modifier avec success');
         $this->dispatch('refresh-users');
         $this->closeModal();
-
     }
 
     public function render(): View

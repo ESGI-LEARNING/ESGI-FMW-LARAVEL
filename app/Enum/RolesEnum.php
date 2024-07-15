@@ -12,4 +12,3 @@ enum RolesEnum
 
     const AUTHOR = 'author';
 }
-

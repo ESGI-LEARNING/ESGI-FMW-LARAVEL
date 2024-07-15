@@ -2,6 +2,4 @@
 
 namespace App\Services\S3Service;
 
-class S3ServiceFactory
-{
-}
+class S3ServiceFactory {}

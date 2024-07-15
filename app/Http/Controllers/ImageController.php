@@ -30,5 +30,4 @@ class ImageController extends Controller
             abort(403);
         }
     }
-
 }

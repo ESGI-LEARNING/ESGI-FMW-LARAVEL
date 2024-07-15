@@ -19,9 +19,10 @@ class AdminArticleLivewire extends Component
     {
         $articles = Article::query()
             ->where(function ($query) {
-                $query->where('title', 'like', '%' . $this->search . '%');
+                $query->where('title', 'like', '%'.$this->search.'%');
             })
             ->paginate(10);
+
         return view('admin.articles.livewire.admin-article-livewire', compact('articles'));
     }
 }

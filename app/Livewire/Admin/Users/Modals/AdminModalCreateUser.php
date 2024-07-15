@@ -35,9 +35,9 @@ class AdminModalCreateUser extends ModalComponent
     {
         $this->validate();
 
-        $user = new User();
-        $user->name = $this->name;
-        $user->email = $this->email;
+        $user           = new User();
+        $user->name     = $this->name;
+        $user->email    = $this->email;
         $user->password = Hash::make($this->password);
         $user->save();
 
