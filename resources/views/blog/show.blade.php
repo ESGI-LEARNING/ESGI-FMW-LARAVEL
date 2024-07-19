@@ -113,16 +113,40 @@
             <!-- Comments -->
             <div class="mt-10">
                 <h2 class="text-xl mb-2">Comments</h2>
+                @auth
+                    @livewire('comment.modals.create-comment', ['article_id' => $article->id])
+                @endauth
                 <div class="max-w-full mx-auto">
                     @foreach($article->comments as $comment)
                         <div class="p-4 bg-white shadow sm:rounded-lg mb-4">
                             <div class="flex justify-between gap-8">
                                 <div class="w-full">
                                     <h3 class="font-semibold">{{ $comment->user->name }}</h3>
-                                    <p>{{ $comment->content }}</p>
+                                    <div class="mt-1">
+                                        <span class="font-bold">{{ $comment->name }}</span>
+                                        <span class="text-gray-500">{{ $comment->email }}</span>
+                                    </div>
+                                    <div class="mt-2">
+                                        <span>{{ $comment->content }}</span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p>{{ $comment->created_at->diffForHumans() }}</p>
+                                <div class="flex justify-between gap-6 items-center">
+                                    <div>
+                                        <p>{{ $comment->created_at->diffForHumans() }}</p>
+                                    </div>
+                                    <div class="flex flex-col gap-2 justify-items-center w-full">
+                                        @if($comment->user_id === auth()->id())
+                                            @livewire('comment.modals.edit-comment', ['comment' => $comment])
+                                            @livewire('comment.modals.delete-comment', ['comment' => $comment])
+
+                                            <x-modules.button.icon-button
+                                                wire:click="$dispatch('openModal', { component: 'livewire.comment.modals.delete-comment', arguments: { comment: {{ $comment }} }})"
+                                            >
+                                                <x-icons.icon-delete class="text-red-500"/>
+                                            </x-modules.button.icon-button>
+
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
