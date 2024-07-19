@@ -10,6 +10,14 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'content',
+        'is_reported',
+        'user_id',
+        'article_id',
+        'comment_id',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
