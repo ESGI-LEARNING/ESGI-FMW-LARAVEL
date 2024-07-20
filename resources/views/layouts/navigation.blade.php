@@ -11,12 +11,15 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-modules.nav.nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Accueil') }}
                     </x-modules.nav.nav-link>
                     <x-modules.nav.nav-link :href="route('blog.index')" :active="request()->routeIs('blog.*')">
                         {{ __('Blog') }}
+                    </x-modules.nav.nav-link>
+                    <x-modules.nav.nav-link :href="route('contact.show')" :active="request()->routeIs('contact.show')">
+                        {{ __('Contact') }}
                     </x-modules.nav.nav-link>
                 </div>
             </div>
