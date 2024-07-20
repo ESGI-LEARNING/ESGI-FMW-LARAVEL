@@ -17,11 +17,11 @@ class AdminModalDeleteCategory extends ModalComponent
 
     public function delete(): void
     {
-        $this->category->delete();
-
-        session()->flash('success', 'Categorie supprimée avec success');
+        $category = Category::query()->findOrFail($this->category->id);
+        $category->delete();
         $this->dispatch('refresh-categories');
         $this->closeModal();
+        $this->reset();
     }
 
     public function render(): View

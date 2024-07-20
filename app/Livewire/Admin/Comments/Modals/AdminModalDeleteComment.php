@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire\Comment\Modals;
+namespace App\Livewire\Admin\Comments\Modals;
 
 use App\Models\Comment;
 use Illuminate\View\View;
 use LivewireUI\Modal\ModalComponent;
 
-class DeleteComment extends ModalComponent
+class AdminModalDeleteComment extends ModalComponent
 {
     public Comment $comment;
 
@@ -17,19 +17,16 @@ class DeleteComment extends ModalComponent
 
     public function delete(): void
     {
-        if ($this->comment) {
-            $this->comment->delete();
-            $this->dispatch('refresh-comments');
-            session()->flash('success', 'Commentaire supprimé avec succès');
-        } else {
-            session()->flash('error', 'Commentaire non trouvé');
+        $comment = Comment::query()->where('id', $this->comment->id)->first();
+        if($comment) {
+            $comment->delete();
         }
+        $this->dispatch('refresh-comments');
         $this->closeModal();
     }
-
     public function render(): View
     {
-        return view('livewire.comment.delete-comment');
+        return view('admin.comments.livewire.modals.modal-admin-comment-delete-livewire');
     }
 
     public static function modalMaxWidth(): string

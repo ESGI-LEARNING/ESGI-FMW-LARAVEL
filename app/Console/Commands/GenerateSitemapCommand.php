@@ -5,10 +5,8 @@ namespace App\Console\Commands;
 use App\Models\Article;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Sitemap\Sitemap;
-use Spatie\Sitemap\Tags\Url;
 
 class GenerateSitemapCommand extends Command
 {
