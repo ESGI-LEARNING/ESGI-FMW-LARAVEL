@@ -108,6 +108,9 @@
             <x-modules.nav.responsive-nav-link :href="route('blog.index')" :active="request()->routeIs('blog.*')">
                 {{ __('Blog') }}
             </x-modules.nav.responsive-nav-link>
+            <x-modules.nav.responsive-nav-link :href="route('contact.show')" :active="request()->routeIs('contact.show')">
+                {{ __('Contact') }}
+            </x-modules.nav.responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
