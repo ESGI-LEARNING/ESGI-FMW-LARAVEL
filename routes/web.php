@@ -19,13 +19,13 @@ Route::controller(BlogController::class)->prefix('/blog')->name('blog.')->group(
     Route::get('/{article:slug}', 'show')->name('show');
 });
 
+Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
-    Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
     Route::prefix('/admin')->middleware('role:' . RolesEnum::SUPER_ADMIN)->name('admin.')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('index');
