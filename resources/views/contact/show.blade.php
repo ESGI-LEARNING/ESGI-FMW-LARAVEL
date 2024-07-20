@@ -8,46 +8,47 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 bg-gray-50">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                <div class="px-4 py-5 sm:px-6">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900">Formulaire de contact</h3>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <div class="px-6 py-5 bg-gray-100 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900">Formulaire de contact</h3>
                 </div>
                 <div class="border-t border-gray-200">
-                    <dl>
-                        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            @if (session('success'))
-                                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-
-                            <form action="{{ route('contact.submit') }}" method="POST" class="space-y-4">
-                                @csrf
-                                <div class="form-group">
+                    <div class="px-6 py-5">
+                        @if (session('success'))
+                            <div class="bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded-md mb-6">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+    
+                        <form action="{{ route('contact.submit') }}" method="POST" class="space-y-6">
+                            @csrf
+                            <div class="space-y-4">
+                                <div>
                                     <label for="name" class="block text-sm font-medium text-gray-700">Nom</label>
-                                    <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                                    <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
                                 </div>
-
-                                <div class="form-group">
+    
+                                <div>
                                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                                    <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                                    <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
                                 </div>
-
-                                <div class="form-group">
+    
+                                <div>
                                     <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-                                    <textarea id="message" name="message" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" rows="5" required></textarea>
+                                    <textarea id="message" name="message" class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" rows="6" required></textarea>
                                 </div>
-
-                                <div class="px-4 py-3 text-right sm:px-6">
-                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Envoyer</button>
-                                </div>
-                            </form>
-                        </div>
-                    </dl>
+                            </div>
+    
+                            <div class="flex justify-end">
+                                <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Envoyer</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    
 </x-app-layout>
