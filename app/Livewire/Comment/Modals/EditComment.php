@@ -3,33 +3,39 @@
 namespace App\Livewire\Comment\Modals;
 
 use App\Models\Comment;
-use Livewire\Component;
+use Illuminate\View\View;
+use LivewireUI\Modal\ModalComponent;
 
-class EditComment extends Component
+class EditComment extends ModalComponent
 {
-    protected $listeners = ['openModal'];
+    public Comment $comment;
 
-    public $content;
+    public string $content;
 
-    protected $rules = [
+    protected array $rules = [
         'content' => 'required|string|max:500',
     ];
 
-    public function openModal($modal, $comment)
+    public function mount(Comment $comment): void
     {
-        $this->{$modal . 'Modal'} = true;
         $this->comment = $comment;
+        $this->content = $comment->content;
     }
 
-    public function update() :void
+    public function update(): void
     {
         $this->validate();
-        $comment = Comment::find($this->comment->id);
-        $comment->content = $this->content;
-        $comment->save();
-        $this->dispatchBrowserEvent('commentUpdated');
+
+        $this->comment->update([
+            'content' => $this->content,
+        ]);
+
+        $this->dispatch('refresh-comments');
+        session()->flash('success', 'Commentaire modifié avec succès');
+        $this->closeModal();
     }
-    public function render()
+
+    public function render(): View
     {
         return view('livewire.comment.edit-comment');
     }

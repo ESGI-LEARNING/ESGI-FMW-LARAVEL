@@ -1,8 +1,7 @@
 <div>
-    {{-- Close your eyes. Count to one. That is how long forever feels. --}}
     <x-modules.modals.modal>
         <x-modules.modals.modal-body>
-            <h1>Supprimer mon commentaire</h1>
+            <h1>Supprimer le commentaire</h1>
         </x-modules.modals.modal-body>
 
         <x-modules.modals.modal-body>

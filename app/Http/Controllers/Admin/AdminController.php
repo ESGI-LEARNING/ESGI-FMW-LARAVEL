@@ -21,4 +21,9 @@ class AdminController extends Controller
     {
         return view('admin.categories.index');
     }
+
+    public function comments(): View
+    {
+        return view('admin.comments.index');
+    }
 }

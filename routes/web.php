@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/users', [AdminController::class, 'users'])->name('users');
         Route::get('/categories', [AdminController::class, 'categories'])->name('categories');
+        Route::get('/comments', [AdminController::class, 'comments'])->name('comments');
 
         Route::controller(AdminArticleController::class)->prefix('/articles')->name('articles.')->group(function () {
             Route::get('/', 'index')->name('index');

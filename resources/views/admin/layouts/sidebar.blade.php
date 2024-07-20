@@ -27,7 +27,7 @@
                 <x-icons.icon-news/>
                 Articles
             </x-modules.sidebar.sidebar-link>
-            <x-modules.sidebar.sidebar-link href="" :active="null">
+            <x-modules.sidebar.sidebar-link href="{{ route('admin.comments')}}" :active="request()->routeIs('admin.comments.*')">
                 <x-icons.icon-comments/>
                 Commentaires
             </x-modules.sidebar.sidebar-link>
