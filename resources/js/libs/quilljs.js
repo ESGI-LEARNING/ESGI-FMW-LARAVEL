@@ -15,4 +15,14 @@ if (input) {
         placeholder: 'Plongez-vous dans votre article...',
         theme: 'snow', // or 'bubble'
     });
+
+    let quillEditor = document.getElementById('quill-editor-area');
+
+    quill.on('text-change', function(e) {
+        quillEditor.value = quill.root.innerHTML;
+    });
+
+    quillEditor.addEventListener('input', function() {
+        quill.root.innerHTML = quillEditor.value;
+    });
 }

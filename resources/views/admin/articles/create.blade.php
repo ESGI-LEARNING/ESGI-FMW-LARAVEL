@@ -5,7 +5,7 @@
         <h1>Créer un article</h1>
     </div>
 
-    <form action="{{ route('admin.articles.store') }}" method="POST">
+    <form action="{{ route('admin.articles.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="grid grid-cols-2 gap-3 mb-3">
@@ -23,7 +23,7 @@
 
             <div>
                 <x-modules.form.input-label for="images" value="Images"/>
-                <x-modules.form.input-file name="images" class="w-full" multiple/>
+                <x-modules.form.input-file name="images[]" class="w-full" multiple/>
                 <x-modules.form.input-error :messages="$errors->get('images')" class="mt-2"/>
             </div>
 
@@ -46,7 +46,7 @@
 
         <div>
             <x-modules.form.input-label for="content" value="Contenu"/>
-            <x-modules.form.input-quilljs class="w-full"/>
+            <x-modules.form.input-quilljs class="w-full" name="content"/>
             <x-modules.form.input-error :messages="$errors->get('content')" class="mt-2"/>
         </div>
 
