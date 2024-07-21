@@ -20,6 +20,14 @@ class Article extends Model
         'is_published',
     ];
 
+    /**
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'is_published' => 'boolean',
+    ];
+
+
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);

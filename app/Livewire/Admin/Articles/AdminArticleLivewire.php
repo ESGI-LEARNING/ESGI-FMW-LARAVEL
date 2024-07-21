@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Articles;
 
 use App\Models\Article;
 use Illuminate\View\View;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,6 +15,12 @@ class AdminArticleLivewire extends Component
 
     #[Url(history: true)]
     public string $search = '';
+
+    #[On('refresh-articles')]
+    public function refresh(): void
+    {
+        $this->render();
+    }
 
     public function render(): View
     {

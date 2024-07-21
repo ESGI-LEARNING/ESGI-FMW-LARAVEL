@@ -27,14 +27,10 @@
             <div>
                 <div class="flex gap-3">
                     @foreach($article->images as $image)
-                       <div class="flex items-center flex-col">
-                           <img src="{{ $image->path }}" alt="{{ $article->title }}">
-                           <x-modules.cta.danger-cta
-                               href="{{ route('admin.articles.delete.image', ['id' => $image->id ]) }}"
-                           >
-                               Supprimer
-                           </x-modules.cta.danger-cta>
-                       </div>
+                        <div class="flex items-center flex-col">
+                            <img src="{{ $image->path }}" alt="{{ $article->title }}">
+                            @livewire('admin.articles.admin-article-delete-image', ['id' => $image->id, 'slug' => $article->slug])
+                        </div>
                     @endforeach
                 </div>
                 <x-modules.form.input-label for="images" value="Images"/>

@@ -53,7 +53,9 @@
                         >
                             <x-icons.icon-edit class="text-indigo-500"/>
                         </x-modules.cta.icon-cta>
-                        <x-modules.button.icon-button>
+                        <x-modules.button.icon-button
+                            wire:click="$dispatch('openModal', { component: 'admin.articles.modals.admin-modal-delete-article', arguments: { slug: '{{ $article->slug }}' }})"
+                        >
                             <x-icons.icon-delete class="text-red-500"/>
                         </x-modules.button.icon-button>
                     </td>

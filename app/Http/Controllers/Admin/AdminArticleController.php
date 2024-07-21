@@ -32,7 +32,7 @@ class AdminArticleController extends Controller
             'slug' => Str::slug($request->get('title')),
             'description' => $request->get('description'),
             'content' => $request->get('content'),
-            'is_published' => $request->get('is_published') === 'on',
+            'is_published' => $request->boolean('is_online'),
         ]);
 
         $article->categories()->attach($request->get('categories'));
@@ -61,7 +61,7 @@ class AdminArticleController extends Controller
         return view('admin.articles.edit', compact('article', 'categories'));
     }
 
-    public function update(Request $request, string $slug)
+    public function update(AdminArticleStoreRequest $request, string $slug)
     {
         $article = Article::query()->where('slug', $slug)->firstOrFail();
 
@@ -70,28 +70,23 @@ class AdminArticleController extends Controller
             'slug' => Str::slug($request->get('title')),
             'description' => $request->get('description'),
             'content' => $request->get('content'),
-            'is_published' => $request->get('is_published') === 'on',
+            'is_published' => $request->boolean('is_online'),
         ]);
 
         $article->categories()->sync($request->get('categories'));
-        $images = S3Service::uploadFile('media', $request->file('images'));
 
-        foreach ($images as $image) {
-            Image::create([
-                'article_id' => $article->id,
-                'path' => $image,
-            ]);
+        if ($request->hasFile('images')) {
+            $images = S3Service::uploadFile('media', $request->file('images'));
+
+            foreach ($images as $image) {
+                Image::create([
+                    'article_id' => $article->id,
+                    'path' => $image,
+                ]);
+            }
         }
-    }
 
-    public function deleteImage(int $id)
-    {
-        // Delete image from S3 and table article
-        $image = Image::query()->findOrFail($id);
-        S3Service::deleteFile($image->path);
-        $image->delete();
-
-        return redirect()->back()
-            ->with('success', 'Image supprimée avec succès');
+        return redirect()->route('admin.articles.index')
+            ->with('success', 'Article modifié avec succès');
     }
 }
