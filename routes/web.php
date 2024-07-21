@@ -32,8 +32,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::post('/create', 'store')->name('store');
-            Route::get('/{article}/edit', 'edit')->name('edit');
-            Route::patch('/{article}', 'update')->name('update');
+            Route::get('/{slug}/edit', 'edit')->name('edit');
+            Route::post('/{slug}', 'update')->name('update');
+            Route::delete('/images/{id}', 'deleteImage')->name('delete.image');
         });
     });
 });

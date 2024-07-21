@@ -30,37 +30,66 @@ class AdminArticleController extends Controller
         $article = Article::create([
             'title' => $request->get('title'),
             'slug' => Str::slug($request->get('title')),
+            'description' => $request->get('description'),
             'content' => $request->get('content'),
             'is_published' => $request->get('is_published') === 'on',
         ]);
 
         $article->categories()->attach($request->get('categories'));
+        $images = S3Service::uploadFile('media', $request->file('images'));
 
-        // Upload images to S3
-        $images  = S3Service::uploadFile('media', $request->file('images'));
-
-        Image::create([
-            'article_id' => $article->id,
-            'path' => $images,
-        ]);
+        foreach ($images as $image) {
+            Image::create([
+                'article_id' => $article->id,
+                'path' => $image,
+            ]);
+        }
 
         return redirect()->route('admin.articles.index')
             ->with('success', 'Article crée avec succès');
     }
 
-    public function edit($id): View
+    public function edit(string $slug): View
     {
-        return view('admin.articles.edit');
+        $article = Article::query()
+            ->with('categories', 'images')
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $categories = Category::all();
+
+        return view('admin.articles.edit', compact('article', 'categories'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, string $slug)
     {
-        //
+        $article = Article::query()->where('slug', $slug)->firstOrFail();
+
+        $article->update([
+            'title' => $request->get('title'),
+            'slug' => Str::slug($request->get('title')),
+            'description' => $request->get('description'),
+            'content' => $request->get('content'),
+            'is_published' => $request->get('is_published') === 'on',
+        ]);
+
+        $article->categories()->sync($request->get('categories'));
+        $images = S3Service::uploadFile('media', $request->file('images'));
+
+        foreach ($images as $image) {
+            Image::create([
+                'article_id' => $article->id,
+                'path' => $image,
+            ]);
+        }
     }
 
-    public function deleteImage($id)
+    public function deleteImage(int $id)
     {
         // Delete image from S3 and table article
+        $image = Image::query()->findOrFail($id);
+        S3Service::deleteFile($image->path);
+        $image->delete();
 
         return redirect()->back()
             ->with('success', 'Image supprimée avec succès');

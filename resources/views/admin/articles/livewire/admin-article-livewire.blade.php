@@ -48,10 +48,11 @@
                     </td>
                     <td class="px-6 py-4">{{ $article->created_at->format('d/m/Y')}}</td>
                     <td class="px-6 py-2">
-                        <x-modules.button.icon-button
+                        <x-modules.cta.icon-cta
+                            href="{{ route('admin.articles.edit', ['slug' => $article->slug]) }}"
                         >
                             <x-icons.icon-edit class="text-indigo-500"/>
-                        </x-modules.button.icon-button>
+                        </x-modules.cta.icon-cta>
                         <x-modules.button.icon-button>
                             <x-icons.icon-delete class="text-red-500"/>
                         </x-modules.button.icon-button>

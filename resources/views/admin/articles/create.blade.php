@@ -11,7 +11,7 @@
         <div class="grid grid-cols-2 gap-3 mb-3">
             <div>
                 <x-modules.form.input-label for="title" value="Titre"/>
-                <x-modules.form.text-input name="title" class="w-full" type="text"/>
+                <x-modules.form.text-input name="title" class="w-full" type="text" value="{{ old('title') }}"/>
                 <x-modules.form.input-error :messages="$errors->get('title')" class="mt-2"/>
             </div>
 
@@ -23,7 +23,7 @@
 
             <div>
                 <x-modules.form.input-label for="images" value="Images"/>
-                <x-modules.form.input-file name="images[]" class="w-full" multiple/>
+                <x-modules.form.input-file name="images[]" class="w-full" multiple value="{{ old('images') }}"/>
                 <x-modules.form.input-error :messages="$errors->get('images')" class="mt-2"/>
             </div>
 
@@ -41,12 +41,12 @@
         <div>
             <x-modules.form.input-label for="description" value="Description"/>
             <x-modules.form.input-textaera name="description" class="w-full" rows="5"/>
-            <x-modules.form.input-error :messages="$errors->get('description')" class="mt-2"/>
+            <x-modules.form.input-error :messages="$errors->get('description')" class="mt-2" value="{{ old('description') }}"/>
         </div>
 
         <div>
             <x-modules.form.input-label for="content" value="Contenu"/>
-            <x-modules.form.input-quilljs class="w-full" name="content"/>
+            <x-modules.form.input-quilljs class="w-full" name="content" value="{{ old('content') }}"/>
             <x-modules.form.input-error :messages="$errors->get('content')" class="mt-2"/>
         </div>
 

@@ -10,6 +10,11 @@ class Image extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'article_id',
+        'path',
+    ];
+
     public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class);
