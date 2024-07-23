@@ -1,26 +1,26 @@
 version: '3.8'
 services:
 
-  # PHP Service
-  php:
-    build:
-      context: .
-      dockerfile: docker/php/Dockerfile
-    container_name: ${APP_SLUG}_php
-    restart: unless-stopped
-    ports:
-      - "5173:5173"
-    environment:
-      SERVICE_NAME: ${APP_SLUG}_php
-      SERVICE_TAGS: ${APP_ENV}
-    working_dir: /var/www
-    volumes:
-      - ./:/var/www
-      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
-    networks:
-      - app_network
+    # PHP Service
+    php:
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        container_name: ${APP_SLUG}_php
+        restart: unless-stopped
+        ports:
+            - "5173:5173"
+        environment:
+            SERVICE_NAME: ${APP_SLUG}_php
+            SERVICE_TAGS: ${APP_ENV}
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        networks:
+            - app_network
 
-    # Queue service
+        # Queue service
     queue:
         build:
             context: .
@@ -38,6 +38,18 @@ services:
         networks:
             - app_network
 
+        # Nginx Service
+    nginx:
+        image: nginx:alpine
+        container_name: ${APP_SLUG}_nginx
+        restart: unless-stopped
+        ports:
+            - "8888:80"
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            - app_network
     # Nginx Service
     nginx:
         image: nginx:alpine
@@ -50,20 +62,8 @@ services:
             - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
         networks:
             - app_network
-  # Nginx Service
-  nginx:
-    image: nginx:alpine
-    container_name: ${APP_SLUG}_nginx
-    restart: unless-stopped
-    ports:
-      - "8888:80"
-    volumes:
-      - ./:/var/www
-      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-    networks:
-      - app_network
 
-    # Mariadb Service
+        # Mariadb Service
     database:
         image: mariadb:latest
         container_name: ${APP_SLUG}_database
@@ -83,7 +83,7 @@ services:
         networks:
             - app_network
 
-    # Redis service
+        # Redis service
     redis:
         image: redis:latest
         container_name: ${APP_SLUG}_redis
@@ -94,18 +94,18 @@ services:
         networks:
             - app_network
 
-  # Mailhog Service
-  mailhog:
-    image: mailhog/mailhog
-    container_name: ${APP_SLUG}_mailhog
-    restart: unless-stopped
-    ports:
-      - "1025:1025" # SMTP server
-      - "8025:8025" # Web UI
-    networks:
-      - app_network
+    # Mailhog Service
+    mailhog:
+        image: mailhog/mailhog
+        container_name: ${APP_SLUG}_mailhog
+        restart: unless-stopped
+        ports:
+            - "1025:1025" # SMTP server
+            - "8025:8025" # Web UI
+        networks:
+            - app_network
 
 # Docker Networks
 networks:
-  app_network:
-    driver: bridge
+    app_network:
+        driver: bridge
