@@ -13,7 +13,7 @@ class S3Service
 
         foreach ($file as $image) {
             $pathname = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-            $path[] = Storage::disk('s3')->putFileAs($folder, $image, $pathname . '.' . $image->getClientOriginalExtension());
+            $path[]   = Storage::disk('s3')->putFileAs($folder, $image, $pathname.'.'.$image->getClientOriginalExtension());
         }
 
         return $path;

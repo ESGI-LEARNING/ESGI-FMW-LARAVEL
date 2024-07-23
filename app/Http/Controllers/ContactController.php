@@ -17,14 +17,14 @@ class ContactController extends Controller
     {
         // Valider les données
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email|max:255',
             'message' => 'required|string|max:2000',
         ]);
 
         $details = [
-            'name' => $request->name,
-            'email' => $request->email,
+            'name'    => $request->name,
+            'email'   => $request->email,
             'message' => $request->message,
         ];
 

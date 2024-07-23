@@ -22,16 +22,16 @@ class AdminArticleStoreRequest extends FormRequest
     public function rules(): array
     {
         $validator = [
-            'title' => ['required', 'string', 'min:5'],
+            'title'       => ['required', 'string', 'min:5'],
             'description' => ['required', 'string', 'min:10'],
-            'content' => ['required'],
-            'categories' => ['required'],
+            'content'     => ['required'],
+            'categories'  => ['required'],
         ];
 
         if ($this->routeIs('admin.articles.create') && $this->isMethod('POST')) {
             $validator['images'] = ['required'];
         }
 
-        return  $validator;
+        return $validator;
     }
 }
