@@ -4,10 +4,10 @@ use App\Enum\RolesEnum;
 use App\Http\Controllers\Admin\AdminArticleController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::prefix('/admin')->middleware('role:' . RolesEnum::SUPER_ADMIN)->name('admin.')->group(function () {
+    Route::prefix('/admin')->middleware('role:'.RolesEnum::SUPER_ADMIN)->name('admin.')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('index');
 
         Route::get('/users', [AdminController::class, 'users'])->name('users');
@@ -53,4 +53,4 @@ Route::get('/sitemap.xml', function () {
     ]);
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

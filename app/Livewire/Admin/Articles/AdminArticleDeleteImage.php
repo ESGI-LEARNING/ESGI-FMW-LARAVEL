@@ -10,12 +10,13 @@ use Livewire\Component;
 class AdminArticleDeleteImage extends Component
 {
     public int $imageId;
+
     public string $slug;
 
     public function mount(int $id, string $slug): void
     {
         $this->imageId = $id;
-        $this->slug = $slug;
+        $this->slug    = $slug;
     }
 
     public function deleteImage(): void

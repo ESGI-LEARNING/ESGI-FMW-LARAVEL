@@ -28,10 +28,10 @@ class AdminArticleController extends Controller
     public function store(AdminArticleStoreRequest $request)
     {
         $article = Article::create([
-            'title' => $request->get('title'),
-            'slug' => Str::slug($request->get('title')),
-            'description' => $request->get('description'),
-            'content' => $request->get('content'),
+            'title'        => $request->get('title'),
+            'slug'         => Str::slug($request->get('title')),
+            'description'  => $request->get('description'),
+            'content'      => $request->get('content'),
             'is_published' => $request->boolean('is_online'),
         ]);
 
@@ -41,7 +41,7 @@ class AdminArticleController extends Controller
         foreach ($images as $image) {
             Image::create([
                 'article_id' => $article->id,
-                'path' => $image,
+                'path'       => $image,
             ]);
         }
 
@@ -66,10 +66,10 @@ class AdminArticleController extends Controller
         $article = Article::query()->where('slug', $slug)->firstOrFail();
 
         $article->update([
-            'title' => $request->get('title'),
-            'slug' => Str::slug($request->get('title')),
-            'description' => $request->get('description'),
-            'content' => $request->get('content'),
+            'title'        => $request->get('title'),
+            'slug'         => Str::slug($request->get('title')),
+            'description'  => $request->get('description'),
+            'content'      => $request->get('content'),
             'is_published' => $request->boolean('is_online'),
         ]);
 
@@ -81,7 +81,7 @@ class AdminArticleController extends Controller
             foreach ($images as $image) {
                 Image::create([
                     'article_id' => $article->id,
-                    'path' => $image,
+                    'path'       => $image,
                 ]);
             }
         }

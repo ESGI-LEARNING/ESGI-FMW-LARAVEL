@@ -27,7 +27,6 @@ class Article extends Model
         'is_published' => 'boolean',
     ];
 
-
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);

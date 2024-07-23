@@ -18,12 +18,13 @@ class AdminModalDeleteComment extends ModalComponent
     public function delete(): void
     {
         $comment = Comment::query()->where('id', $this->comment->id)->first();
-        if($comment) {
+        if ($comment) {
             $comment->delete();
         }
         $this->dispatch('refresh-comments');
         $this->closeModal();
     }
+
     public function render(): View
     {
         return view('admin.comments.livewire.modals.modal-admin-comment-delete-livewire');
