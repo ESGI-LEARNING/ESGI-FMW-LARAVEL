@@ -44,7 +44,7 @@
                             <x-icons.icon-edit class="text-indigo-500"/>
                         </x-modules.button.icon-button>
                         <x-modules.button.icon-button
-                            wire:click="$dispatch('openModal', { component: 'admin.categories.modals.admin-modal-delete-category', arguments: { category: {{ $category }} }})"
+                            wire:click="$dispatch('openModal', { component: 'admin.categories.modals.admin-modal-delete-category', arguments:  { category: {{ $category->id }} }})"
                         >
                             <x-icons.icon-delete class="text-red-500"/>
                         </x-modules.button.icon-button>

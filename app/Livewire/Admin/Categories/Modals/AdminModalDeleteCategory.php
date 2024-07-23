@@ -8,7 +8,7 @@ use LivewireUI\Modal\ModalComponent;
 
 class AdminModalDeleteCategory extends ModalComponent
 {
-    public Category $category;
+    public $category;
 
     public function mount(Category $category): void
     {
@@ -17,11 +17,14 @@ class AdminModalDeleteCategory extends ModalComponent
 
     public function delete(): void
     {
-        $category = Category::query()->findOrFail($this->category->id);
-        $category->delete();
+        $category = Category::query()->where('id', $this->category->id)->first();
+
+        if ($category) {
+            $category->delete();
+        }
+
         $this->dispatch('refresh-categories');
         $this->closeModal();
-        $this->reset();
     }
 
     public function render(): View
