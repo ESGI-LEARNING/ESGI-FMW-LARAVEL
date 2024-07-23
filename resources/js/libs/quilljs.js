@@ -16,13 +16,15 @@ if (input) {
         theme: 'snow', // or 'bubble'
     });
 
-    let quillEditor = document.getElementById('quill-editor-area');
+    if (quill) {
+        let quillEditor = document.getElementById('quill-editor-area');
 
-    quill.on('text-change', function(e) {
-        quillEditor.value = quill.root.innerHTML;
-    });
+        quill.on('text-change', function(e) {
+            quillEditor.value = quill.root.innerHTML;
+        });
 
-    quillEditor.addEventListener('input', function() {
-        quill.root.innerHTML = quillEditor.value;
-    });
+        quillEditor.addEventListener('input', function() {
+            quill.root.innerHTML = quillEditor.value;
+        });
+    }
 }
