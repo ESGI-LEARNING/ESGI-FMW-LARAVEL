@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/images/{path}', [ImageController::class, 'show'])->where('path', '.*')->name('images.show');
@@ -39,7 +40,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/sitemap.xml', function () {
-    return response()->file(public_path('sitemap.xml'));
+    $file = Storage::disk('s3')
+        ->get('config/sitemap.xml');
+
+    return response($file, 200, [
+        'Content-Type' => ' application/xml',
+    ]);
 });
 
 require __DIR__.'/auth.php';

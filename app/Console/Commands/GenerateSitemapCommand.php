@@ -29,8 +29,9 @@ class GenerateSitemapCommand extends Command
             }
         });
 
-        Storage::disk('public')->put('sitemap.xml', $sitemap->render());
-        Storage::disk('s3')->put('config/sitemap.xml', $sitemap->render());
+        Storage::disk('s3')
+            ->put('config/sitemap.xml', $sitemap->render());
+
         $this->info('Sitemap generation completed.');
     }
 }
