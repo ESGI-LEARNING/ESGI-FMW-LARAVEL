@@ -16,7 +16,7 @@
                 </div>
             </header>
         @endisset
-
+        @include('layouts.session')
         <!-- Page Content -->
         <main>
             {{ $slot }}
