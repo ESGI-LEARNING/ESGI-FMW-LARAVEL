@@ -8,7 +8,7 @@ use LivewireUI\Modal\ModalComponent;
 
 class AdminModalDeleteComment extends ModalComponent
 {
-    public Comment $comment;
+    public $comment;
 
     public function mount(Comment $comment): void
     {
