@@ -34,9 +34,9 @@
                                 </div>
                             </div>
 
-                            <div class="flex justify-end">
-                                <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Envoyer</button>
-                            </div>
+                            <x-modules.button.primary-button>
+                                Envoyer
+                            </x-modules.button.primary-button>
                         </form>
                     </div>
                 </div>

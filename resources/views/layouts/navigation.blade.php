@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-        <div class="flex justify-between h-16 items-center">
+        <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
@@ -27,7 +27,7 @@
             <!-- Settings Dropdown -->
             @if (Auth::check())
                 <div class="flex">
-                    <div class="hidden space-x-2 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="inline-flex items-center px-2 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                         @auth
                             <x-dropdown align="right" width="48">
                                 <x-slot name="trigger">
@@ -51,6 +51,12 @@
                                         {{ __('Profile') }}
                                     </x-dropdown-link>
 
+                                    @if (Auth::user()->hasRole(App\Enum\RolesEnum::SUPER_ADMIN))
+                                        <x-dropdown-link :href="route('admin.index')">
+                                            {{ __('Admin') }}
+                                        </x-dropdown-link>
+                                    @endif
+
                                     <!-- Authentication -->
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
@@ -64,7 +70,7 @@
                                 </x-slot>
                             </x-dropdown>
                         @else
-                            <x-modules.nav.nav-link :href="route('login')" :active="request()->routeIs('login')">
+                            <x-modules.nav.nav-link :href="route('login')" :active="request()->routeIs('login')" >
                                 Se connecter
                             </x-modules.nav.nav-link>
                             <x-modules.nav.nav-link :href="route('register')" :active="request()->routeIs('register')">
