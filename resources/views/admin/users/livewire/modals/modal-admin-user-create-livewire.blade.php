@@ -23,7 +23,7 @@
                 <x-modules.form.input-error :messages="$errors->get('password')" class="mt-2"/>
             </div>
             <div class="mt-3">
-                <x-modules.form.input-label for="roles" :value="Roles"/>
+                <x-modules.form.input-label for="roles" value="Roles"/>
                 <x-modules.form.select-input id="tom-select" wire:model.defer="user_roles" class="w-full" multiple>
                     @foreach($roles as $role)
                         <option value="{{ $role->id }}">{{ $role->name }}</option>
