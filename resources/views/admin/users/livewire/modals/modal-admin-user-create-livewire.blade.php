@@ -7,23 +7,23 @@
         <x-modules.modals.modal-body>
             <div class="grid grid-cols-2 gap-3">
                 <div>
-                    <x-modules.form.input-label for="name" :value="__('input.label.name')"/>
+                    <x-modules.form.input-label for="name" alue="Nom"/>
                     <x-modules.form.text-input wire:model.defer="name" class="w-full" type="text"/>
                     <x-modules.form.input-error :messages="$errors->get('name')" class="mt-2"/>
                 </div>
                 <div>
-                    <x-modules.form.input-label for="email" :value="__('input.label.email')"/>
+                    <x-modules.form.input-label for="email" value="Email"/>
                     <x-modules.form.text-input wire:model.defer="email" class="w-full" type="email"/>
                     <x-modules.form.input-error :messages="$errors->get('email')" class="mt-2"/>
                 </div>
             </div>
             <div class="mt-3">
-                <x-modules.form.input-label for="password" :value="__('input.label.password')"/>
+                <x-modules.form.input-label for="password" value="Mot de passe"/>
                 <x-modules.form.text-input wire:model.defer="password" class="w-full" type="password"/>
                 <x-modules.form.input-error :messages="$errors->get('password')" class="mt-2"/>
             </div>
             <div class="mt-3">
-                <x-modules.form.input-label for="roles" :value="__('input.label.roles')"/>
+                <x-modules.form.input-label for="roles" :value="Roles"/>
                 <x-modules.form.select-input id="tom-select" wire:model.defer="user_roles" class="w-full" multiple>
                     @foreach($roles as $role)
                         <option value="{{ $role->id }}">{{ $role->name }}</option>

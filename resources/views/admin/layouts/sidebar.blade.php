@@ -12,10 +12,6 @@
                 <x-icons.icon-users/>
                 Utilisateurs
             </x-modules.sidebar.sidebar-link>
-            <x-modules.sidebar.sidebar-link href="" :active="null">
-                <x-icons.icon-logs/>
-                Logs
-            </x-modules.sidebar.sidebar-link>
         </x-modules.sidebar.sidebar-menu>
         <x-modules.sidebar.sidebar-menu>
             <li class="sidebar-menu-title">Propriétés</li>
