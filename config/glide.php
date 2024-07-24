@@ -3,4 +3,3 @@
 return [
     'key' => env('GLIDE_KEY', 'local'),
 ];
-

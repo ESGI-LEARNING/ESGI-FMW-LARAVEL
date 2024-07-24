@@ -36,7 +36,7 @@ class ServerFactory
     /**
      * Create ServerFactory instance.
      *
-     * @param array $config Configuration parameters.
+     * @param  array  $config  Configuration parameters.
      */
     public function __construct(array $config = [])
     {
@@ -80,7 +80,7 @@ class ServerFactory
      */
     public function getSource()
     {
-        if (!isset($this->config['source'])) {
+        if (! isset($this->config['source'])) {
             throw new InvalidArgumentException('A "source" file system must be set.');
         }
 
@@ -112,7 +112,7 @@ class ServerFactory
      */
     public function getCache()
     {
-        if (!isset($this->config['cache'])) {
+        if (! isset($this->config['cache'])) {
             throw new InvalidArgumentException('A "cache" file system must be set.');
         }
 
@@ -194,7 +194,7 @@ class ServerFactory
      */
     public function getWatermarks()
     {
-        if (!isset($this->config['watermarks'])) {
+        if (! isset($this->config['watermarks'])) {
             return;
         }
 
@@ -343,8 +343,7 @@ class ServerFactory
     /**
      * Create configured server.
      *
-     * @param array $config Configuration parameters.
-     *
+     * @param  array  $config  Configuration parameters.
      * @return Server Configured server.
      */
     public static function create(array $config = [])

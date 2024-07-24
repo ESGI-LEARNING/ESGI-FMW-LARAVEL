@@ -99,16 +99,16 @@ class Server
     /**
      * Custom cache path callable.
      *
-     * @var \Closure|null
+     * @var Closure|null
      */
     protected $cachePathCallable;
 
     /**
      * Create Server instance.
      *
-     * @param FilesystemOperator $source Source file system.
-     * @param FilesystemOperator $cache  Cache file system.
-     * @param ApiInterface       $api    Image manipulation API.
+     * @param  FilesystemOperator  $source  Source file system.
+     * @param  FilesystemOperator  $cache  Cache file system.
+     * @param  ApiInterface  $api  Image manipulation API.
      */
     public function __construct(FilesystemOperator $source, FilesystemOperator $cache, ApiInterface $api)
     {
@@ -121,8 +121,7 @@ class Server
     /**
      * Set source file system.
      *
-     * @param FilesystemOperator $source Source file system.
-     *
+     * @param  FilesystemOperator  $source  Source file system.
      * @return void
      */
     public function setSource(FilesystemOperator $source)
@@ -143,8 +142,7 @@ class Server
     /**
      * Set source path prefix.
      *
-     * @param string $sourcePathPrefix Source path prefix.
-     *
+     * @param  string  $sourcePathPrefix  Source path prefix.
      * @return void
      */
     public function setSourcePathPrefix($sourcePathPrefix)
@@ -165,8 +163,7 @@ class Server
     /**
      * Get source path.
      *
-     * @param string $path Image path.
-     *
+     * @param  string  $path  Image path.
      * @return string The source path.
      *
      * @throws FileNotFoundException
@@ -181,7 +178,7 @@ class Server
             $path = trim(substr($path, strlen($baseUrl)), '/');
         }
 
-        if ('' === $path) {
+        if ($path === '') {
             throw new FileNotFoundException('Image path missing.');
         }
 
@@ -195,8 +192,7 @@ class Server
     /**
      * Check if a source file exists.
      *
-     * @param string $path Image path.
-     *
+     * @param  string  $path  Image path.
      * @return bool Whether the source file exists.
      */
     public function sourceFileExists($path)
@@ -211,8 +207,7 @@ class Server
     /**
      * Set base URL.
      *
-     * @param string $baseUrl Base URL.
-     *
+     * @param  string  $baseUrl  Base URL.
      * @return void
      */
     public function setBaseUrl($baseUrl)
@@ -233,8 +228,7 @@ class Server
     /**
      * Set cache file system.
      *
-     * @param FilesystemOperator $cache Cache file system.
-     *
+     * @param  FilesystemOperator  $cache  Cache file system.
      * @return void
      */
     public function setCache(FilesystemOperator $cache)
@@ -255,8 +249,7 @@ class Server
     /**
      * Set cache path prefix.
      *
-     * @param string $cachePathPrefix Cache path prefix.
-     *
+     * @param  string  $cachePathPrefix  Cache path prefix.
      * @return void
      */
     public function setCachePathPrefix($cachePathPrefix)
@@ -287,15 +280,14 @@ class Server
     /**
      * Set temporary EXIF data directory. This directory must be a local path and exists on the filesystem.
      *
-     * @param string $tempDir
-     *
+     * @param  string  $tempDir
      * @return void
      *
      * @throws InvalidArgumentException
      */
     public function setTempDir($tempDir)
     {
-        if (!$tempDir || !is_dir($tempDir)) {
+        if (! $tempDir || ! is_dir($tempDir)) {
             throw new InvalidArgumentException(sprintf('Invalid temp dir provided: "%s" does not exist.', $tempDir));
         }
 
@@ -305,8 +297,7 @@ class Server
     /**
      * Set the group cache in folders setting.
      *
-     * @param bool $groupCacheInFolders Whether to group cache in folders.
-     *
+     * @param  bool  $groupCacheInFolders  Whether to group cache in folders.
      * @return void
      */
     public function setGroupCacheInFolders($groupCacheInFolders)
@@ -327,8 +318,7 @@ class Server
     /**
      * Set the cache with file extensions setting.
      *
-     * @param bool $cacheWithFileExtensions Whether to cache with file extensions.
-     *
+     * @param  bool  $cacheWithFileExtensions  Whether to cache with file extensions.
      * @return void
      */
     public function setCacheWithFileExtensions($cacheWithFileExtensions)
@@ -349,7 +339,7 @@ class Server
     /**
      * Set a custom cachePathCallable.
      *
-     * @param \Closure|null $cachePathCallable The custom cache path callable. It receives the same arguments as @see getCachePath
+     * @param  Closure|null  $cachePathCallable  The custom cache path callable. It receives the same arguments as @see getCachePath
      */
     public function setCachePathCallable(?Closure $cachePathCallable)
     {
@@ -359,7 +349,7 @@ class Server
     /**
      * Gets the custom cachePathCallable.
      *
-     * @return \Closure|null The custom cache path callable. It receives the same arguments as @see getCachePath
+     * @return Closure|null The custom cache path callable. It receives the same arguments as @see getCachePath
      */
     public function getCachePathCallable()
     {
@@ -369,15 +359,14 @@ class Server
     /**
      * Get cache path.
      *
-     * @param string $path   Image path.
-     * @param array  $params Image manipulation params.
-     *
+     * @param  string  $path  Image path.
+     * @param  array  $params  Image manipulation params.
      * @return string Cache path.
      */
     public function getCachePath($path, array $params = [])
     {
         $customCallable = $this->getCachePathCallable();
-        if (null !== $customCallable) {
+        if ($customCallable !== null) {
             $boundCallable = Closure::bind($customCallable, $this, static::class);
 
             return $boundCallable($path, $params);
@@ -405,7 +394,7 @@ class Server
 
         if ($this->cacheWithFileExtensions) {
             $ext = (isset($params['fm']) ? $params['fm'] : pathinfo($path)['extension']);
-            $ext = ('pjpg' === $ext) ? 'jpg' : $ext;
+            $ext = ($ext === 'pjpg') ? 'jpg' : $ext;
             $cachedPath .= '.'.$ext;
         }
 
@@ -415,9 +404,8 @@ class Server
     /**
      * Check if a cache file exists.
      *
-     * @param string $path   Image path.
-     * @param array  $params Image manipulation params.
-     *
+     * @param  string  $path  Image path.
+     * @param  array  $params  Image manipulation params.
      * @return bool Whether the cache file exists.
      */
     public function cacheFileExists($path, array $params)
@@ -434,13 +422,12 @@ class Server
     /**
      * Delete cached manipulations for an image.
      *
-     * @param string $path Image path.
-     *
+     * @param  string  $path  Image path.
      * @return bool Whether the delete succeeded.
      */
     public function deleteCache($path)
     {
-        if (!$this->groupCacheInFolders) {
+        if (! $this->groupCacheInFolders) {
             throw new InvalidArgumentException('Deleting cached image manipulations is not possible when grouping cache into folders is disabled.');
         }
 
@@ -458,8 +445,7 @@ class Server
     /**
      * Set image manipulation API.
      *
-     * @param ApiInterface $api Image manipulation API.
-     *
+     * @param  ApiInterface  $api  Image manipulation API.
      * @return void
      */
     public function setApi(ApiInterface $api)
@@ -480,8 +466,7 @@ class Server
     /**
      * Set default image manipulations.
      *
-     * @param array $defaults Default image manipulations.
-     *
+     * @param  array  $defaults  Default image manipulations.
      * @return void
      */
     public function setDefaults(array $defaults)
@@ -502,8 +487,7 @@ class Server
     /**
      * Set preset image manipulations.
      *
-     * @param array $presets Preset image manipulations.
-     *
+     * @param  array  $presets  Preset image manipulations.
      * @return void
      */
     public function setPresets(array $presets)
@@ -524,8 +508,7 @@ class Server
     /**
      * Get all image manipulations params, including defaults and presets.
      *
-     * @param array $params Image manipulation params.
-     *
+     * @param  array  $params  Image manipulation params.
      * @return array All image manipulation params.
      */
     public function getAllParams(array $params)
@@ -546,11 +529,10 @@ class Server
     /**
      * Set response factory.
      *
-     * @param LaravelResponseFactory|null $responseFactory Response factory.
-     *
+     * @param  LaravelResponseFactory|null  $responseFactory  Response factory.
      * @return void
      */
-    public function setResponseFactory(LaravelResponseFactory $responseFactory = null)
+    public function setResponseFactory(?LaravelResponseFactory $responseFactory = null)
     {
         $this->responseFactory = $responseFactory;
     }
@@ -568,9 +550,8 @@ class Server
     /**
      * Generate and return image response.
      *
-     * @param string $path   Image path.
-     * @param array  $params Image manipulation params.
-     *
+     * @param  string  $path  Image path.
+     * @param  array  $params  Image manipulation params.
      * @return mixed Image response.
      *
      * @throws InvalidArgumentException
@@ -589,9 +570,8 @@ class Server
     /**
      * Generate and return Base64 encoded image.
      *
-     * @param string $path   Image path.
-     * @param array  $params Image manipulation params.
-     *
+     * @param  string  $path  Image path.
+     * @param  array  $params  Image manipulation params.
      * @return string Base64 encoded image.
      *
      * @throws FilesystemException
@@ -612,12 +592,11 @@ class Server
     /**
      * Generate and output image.
      *
-     * @param string $path   Image path.
-     * @param array  $params Image manipulation params.
+     * @param  string  $path  Image path.
+     * @param  array  $params  Image manipulation params.
+     * @return void
      *
      * @throws InvalidArgumentException
-     *
-     * @return void
      */
     public function outputImage($path, array $params)
     {
@@ -631,7 +610,7 @@ class Server
 
             $stream = $this->cache->readStream($path);
 
-            if (0 !== ftell($stream)) {
+            if (ftell($stream) !== 0) {
                 rewind($stream);
             }
             fpassthru($stream);
@@ -644,9 +623,8 @@ class Server
     /**
      * Generate manipulated image.
      *
-     * @param string $path   Image path.
-     * @param array  $params Image manipulation params.
-     *
+     * @param  string  $path  Image path.
+     * @param  array  $params  Image manipulation params.
      * @return string Cache path.
      *
      * @throws FileNotFoundException
@@ -657,11 +635,11 @@ class Server
         $sourcePath = $this->getSourcePath($path);
         $cachedPath = $this->getCachePath($path, $params);
 
-        if (true === $this->cacheFileExists($path, $params)) {
+        if ($this->cacheFileExists($path, $params) === true) {
             return $cachedPath;
         }
 
-        if (false === $this->sourceFileExists($path)) {
+        if ($this->sourceFileExists($path) === false) {
             throw new FileNotFoundException('Could not find the image `'.$sourcePath.'`.');
         }
 
@@ -678,7 +656,7 @@ class Server
         // can only be read from an actual file.
         $tmp = tempnam($this->tempDir, 'Glide');
 
-        if (false === file_put_contents($tmp, $source)) {
+        if (file_put_contents($tmp, $source) === false) {
             throw new FilesystemException('Unable to write temp file for `'.$sourcePath.'`.');
         }
 

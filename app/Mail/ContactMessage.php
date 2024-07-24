@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -18,8 +17,7 @@ class ContactMessage extends Mailable
      */
     public function __construct(
         readonly private array $details,
-    )
-    {
+    ) {
         //
     }
 
@@ -42,8 +40,8 @@ class ContactMessage extends Mailable
             markdown: 'emails.contact.message',
             with: [
                 'message' => $this->details['message'],
-                'name' => $this->details['name'],
-                'email' => $this->details['email'],
+                'name'    => $this->details['name'],
+                'email'   => $this->details['email'],
             ]
         );
     }

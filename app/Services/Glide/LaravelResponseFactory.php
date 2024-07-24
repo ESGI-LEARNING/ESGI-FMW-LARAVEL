@@ -10,24 +10,25 @@ class LaravelResponseFactory
 {
     /**
      * Request object to check "is not modified".
-     * @var Request|null
      */
     protected ?Request $request;
 
     /**
      * Create SymfonyResponseFactory instance.
-     * @param Request|null $request Request object to check "is not modified".
+     *
+     * @param  Request|null  $request  Request object to check "is not modified".
      */
-    public function __construct(Request $request = null)
+    public function __construct(?Request $request = null)
     {
         $this->request = $request;
     }
 
     /**
      * Create the response.
-     * @param  FilesystemOperator $cache The cache file system.
-     * @param  string              $path  The cached file path.
-     * @return StreamedResponse    The response object.
+     *
+     * @param  FilesystemOperator  $cache  The cache file system.
+     * @param  string  $path  The cached file path.
+     * @return StreamedResponse The response object.
      */
     public function create(FilesystemOperator $cache, $path): StreamedResponse
     {
