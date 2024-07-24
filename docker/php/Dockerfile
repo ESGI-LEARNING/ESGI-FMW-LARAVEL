@@ -30,8 +30,18 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install extensions
-RUN pecl install imagick-3.6.0 \
- && docker-php-ext-enable imagick
+RUN apk add git --update --no-cache && \
+    git clone https://github.com/Imagick/imagick.git --depth 1 /tmp/imagick && \
+    cd /tmp/imagick && \
+    git fetch origin master && \
+    git switch master && \
+    cd /tmp/imagick && \
+    phpize && \
+    ./configure && \
+    make && \
+    make install && \
+    apk del git && \
+    docker-php-ext-enable imagick
 
 RUN docker-php-ext-install pdo pdo_mysql exif gd
 
