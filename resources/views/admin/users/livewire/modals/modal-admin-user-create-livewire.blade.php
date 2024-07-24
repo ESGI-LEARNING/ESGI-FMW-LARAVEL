@@ -7,7 +7,7 @@
         <x-modules.modals.modal-body>
             <div class="grid grid-cols-2 gap-3">
                 <div>
-                    <x-modules.form.input-label for="name" alue="Nom"/>
+                    <x-modules.form.input-label for="name" value="Nom"/>
                     <x-modules.form.text-input wire:model.defer="name" class="w-full" type="text"/>
                     <x-modules.form.input-error :messages="$errors->get('name')" class="mt-2"/>
                 </div>
