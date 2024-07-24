@@ -1,13 +1,13 @@
 @component('mail::message')
 # Nouveau message de contact
 
-**Nom** : {{ $details['name'] }}
+**Nom** : {{ $name }}
 
-**Email** : {{ $details['email'] }}
+**Email** : {{ $email }}
 
 **Message** :
 
-{{ $details['message'] }}
+{{ $message }}
 
 Merci,
 {{ config('app.name') }}
