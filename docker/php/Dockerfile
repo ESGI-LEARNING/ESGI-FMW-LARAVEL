@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install extensions
-RUN pecl install imagick \
+RUN pecl install imagick-3.6.0 \
  && docker-php-ext-enable imagick
 
 RUN docker-php-ext-install pdo pdo_mysql exif gd
