@@ -14,7 +14,7 @@
     slides: [
         @foreach($article->images as $image)
             {
-                imgSrc: '{{ $image->path }}',
+                imgSrc: '{{ $image->getImage(1200, 300) }}',
                 imgAlt: '{{ $image->name }}',
             },
         @endforeach

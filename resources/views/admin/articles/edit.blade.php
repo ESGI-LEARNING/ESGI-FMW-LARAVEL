@@ -28,7 +28,7 @@
                 <div class="flex gap-3">
                     @foreach($article->images as $image)
                         <div class="flex items-center flex-col">
-                            <img src="{{ $image->path }}" alt="{{ $article->title }}">
+                            <img src="{{ $image->getImage(100, 100) }}" alt="{{ $article->title }}">
                             @livewire('admin.articles.admin-article-delete-image', ['id' => $image->id, 'slug' => $article->slug])
                         </div>
                     @endforeach

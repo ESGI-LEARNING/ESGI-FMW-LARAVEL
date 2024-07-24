@@ -26,7 +26,7 @@
                         @forelse($articles as $article)
                             <div class="max-w-sm rounded-lg shadow-lg cursor-pointer border hover:border-indigo-500">
                                 <a href="{{ route('blog.show', ['article' => $article ]) }}">
-                                    <img class="w-full rounded-t-lg object-cover" src="{{ $article->images->first()->path }}" alt="Sunset in the mountains" width="300" height="150">
+                                    <img class="w-full rounded-t-lg object-cover" src="{{ $article->getFirstImage(300, 150) }}" alt="Sunset in the mountains" width="300" height="150">
 
                                 <div class="px-6 py-4">
                                     <div class="font-bold text-xl mb-2">{{ $article->title }}</div>

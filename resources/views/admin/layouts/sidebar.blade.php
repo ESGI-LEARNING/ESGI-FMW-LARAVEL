@@ -3,11 +3,11 @@
         <x-modules.sidebar.sidebar-menu>
             <x-modules.sidebar.sidebar-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
                 <x-icons.icon-home/>
-                {{ __('title.admin.dashboard') }}
+               Dashboard
             </x-modules.sidebar.sidebar-link>
         </x-modules.sidebar.sidebar-menu>
         <x-modules.sidebar.sidebar-menu>
-            <li class="sidebar-menu-title">{{ __('title.admin.administration') }}</li>
+            <li class="sidebar-menu-title">Administration</li>
             <x-modules.sidebar.sidebar-link href="{{ route('admin.users') }}" :active="request()->routeIs('admin.users.*')">
                 <x-icons.icon-users/>
                 Utilisateurs
@@ -18,7 +18,7 @@
             </x-modules.sidebar.sidebar-link>
         </x-modules.sidebar.sidebar-menu>
         <x-modules.sidebar.sidebar-menu>
-            <li class="sidebar-menu-title">{{ __('title.admin.properties') }}</li>
+            <li class="sidebar-menu-title">Propriétés</li>
             <x-modules.sidebar.sidebar-link href="{{ route('admin.categories') }}" :active="request()->routeIs('admin.categories.*')">
                 <x-icons.icon-categories/>
                 Categories

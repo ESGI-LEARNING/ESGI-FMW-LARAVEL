@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\Glide\GlideService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -26,6 +27,11 @@ class Article extends Model
     protected $casts = [
         'is_published' => 'boolean',
     ];
+
+    public function getFirstImage(int $width = 100, int $height = 100): string
+    {
+        return GlideService::getLinkImage($this->images->first()->path, $width, $height);
+    }
 
     public function comments(): HasMany
     {

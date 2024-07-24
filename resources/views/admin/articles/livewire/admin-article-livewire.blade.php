@@ -38,7 +38,7 @@
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {{ $article->id }}
                     </th>
-                    <td class="px-6 py-4">{{ \Illuminate\Support\Str::limit($article->description, 10) }} </td>
+                    <td class="px-6 py-4">{{ \Illuminate\Support\Str::limit($article->title, 10) }} </td>
                     <td class="px-6 py-4">{{ \Illuminate\Support\Str::limit($article->description, 30) }} </td>
                     <td class="px-6 py-4">
                         <span

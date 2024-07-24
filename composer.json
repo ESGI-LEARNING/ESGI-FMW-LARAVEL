@@ -18,6 +18,7 @@
         "paulhennell/faker-news": "^2.0",
         "predis/predis": "^2.2",
         "spatie/laravel-sitemap": "^7.2",
+        "symfony/http-foundation": "^7.1",
         "wire-elements/modal": "^2.0"
     },
     "require-dev": {

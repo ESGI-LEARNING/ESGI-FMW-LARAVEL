@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Services\Glide\LaravelResponseFactory;
-use Illuminate\Http\Request;
+use App\Services\Glide\ServerFactory;
 use Illuminate\Support\Facades\Storage;
-use League\Glide\ServerFactory;
 use League\Glide\Signatures\SignatureException;
 use League\Glide\Signatures\SignatureFactory;
+use Symfony\Component\HttpFoundation\Request;
 
 class ImageController extends Controller
 {
@@ -17,11 +17,11 @@ class ImageController extends Controller
             SignatureFactory::create(config('glide.key'))->validateRequest($request->path(), $request->all());
 
             $server = ServerFactory::create([
-                'source'            => Storage::disk('public')->getDriver(),
+                'source'            => Storage::disk('s3')->getDriver(),
                 'cache'             => Storage::disk('local')->getDriver(),
                 'driver'            => 'imagick',
                 'cache_path_prefix' => '.cache',
-                'response'          => new LaravelResponseFactory(),
+                'response'          => new LaravelResponseFactory($request),
                 'base_url'          => 'images',
             ]);
 
