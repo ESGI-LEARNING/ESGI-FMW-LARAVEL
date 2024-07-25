@@ -34,7 +34,7 @@
                                     <x-icons.icon-delete class="text-red-500"/>
                                 </x-modules.button.icon-button>
                             @endif
-                            @if($comment->user_id !== auth()->id())
+                            @if(auth()->check() && $comment->user_id !== auth()->id())
                                 <x-modules.button.icon-button
                                     wire:click="$dispatch('openModal', { component: 'comment.modals.answer-comment', arguments: { comment: {{ $comment }} }})"
                                 >
