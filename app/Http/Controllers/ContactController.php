@@ -21,7 +21,7 @@ class ContactController extends Controller
             'message' => $request->message,
         ];
 
-        Mail::to($details['email'])
+        Mail::to('contact@theomeunier.fr')
             ->queue(new ContactMessage($details));
 
         return redirect()->route('contact.show')
